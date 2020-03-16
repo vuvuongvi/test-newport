@@ -12,6 +12,11 @@ services:
     image: mongo
     ports:
       - "27017:27017"
+  rabbitmq:
+    image: rabbitmq:management
+    ports:
+      - "15672:15672"
+      - "5672:5672"
     
 networks:
   newport_network:

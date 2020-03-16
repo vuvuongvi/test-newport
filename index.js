@@ -7,6 +7,7 @@ const amqp = require('amqplib');
 const uuid = require('uuid/v4')
 const amqpCon = amqp.connect('amqp://localhost');
 const rpcAdd = require('./rpc/queue_add');
+const rpcModify = require('./rpc/queue_modify');
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -45,7 +46,13 @@ app.post('/api/addTask', async function (req, res) {
             throw error;
         } else {
             res.send(`${JSON.stringify(docs)}`);
-            rpcAdd(name);
+            rpcAdd(name)
+                .then((data) => {
+                    console.log(`${data}`)
+                })
+                .catch(error => {
+                    res.send(`${error}`)
+                })
         }
     })
 });
@@ -55,7 +62,8 @@ app.post('/api/modifyTask', async function (req, res) {
         if (error) {
             console.error(error)
         } else {
-            return res.send(`${doc}`)
+            console.log(doc)
+            res.send(`${doc}`);
         }
     });
 });
@@ -92,7 +100,7 @@ app.post('/api/searchTask', async (req, res) => {
               });
         })
 });
-app.get('/', function (req, res) {
+app.get('/api', function (req, res) {
     res.send(`NewPort Test Api`);
 });
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
