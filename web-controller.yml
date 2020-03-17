@@ -5,14 +5,14 @@ metadata:
     name: web
   name: web-controller
 spec:
-  replicas: 2
+  replicas: 1
   template:
     metadata:
       labels:
         name: web
     spec:
       containers:
-      - image: gcr.io/newport-271215/newport
+      - image: asia.gcr.io/newport-271215/test-newport
         name: web
         ports:
         - containerPort: 5000

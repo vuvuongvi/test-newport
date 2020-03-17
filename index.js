@@ -4,10 +4,10 @@ const swaggerDocument = require('./swagger');
 const swaggerUi = require('swagger-ui-express');
 const taskToDoList = require('./db/models/task');
 const amqp = require('amqplib');
-const uuid = require('uuid/v4')
-const amqpCon = amqp.connect('amqp://localhost');
+const uuid = require('uuid/v4');
+require('dotenv').config();
+const amqpCon = amqp.connect(process.env.RABBITMQ_PRODUCTION);
 const rpcAdd = require('./rpc/queue_add');
-const rpcModify = require('./rpc/queue_modify');
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({

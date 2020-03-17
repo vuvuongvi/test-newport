@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/newport', {useNewUrlParser: true})
+const path = require('path')
+require('dotenv').config({path:path.resolve(__dirname, '../.env')})
+mongoose.connect(process.env.DB_PRODUCTION, {useNewUrlParser: true})
     .catch(error => {
         throw error;
     });
