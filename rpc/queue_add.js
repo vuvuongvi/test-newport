@@ -2,7 +2,7 @@ const amqp = require('amqplib');
 const uuid = require('uuid/v4')
 const path = require('path')
 require('dotenv').config({path:path.resolve(__dirname, '../.env')})
-const amqpCon = amqp.connect(process.env.RABBITMQ_PRODUCTION);
+const amqpCon = amqp.connect(process.env.RABBITMQ_LOCAL);
 async function addQueue(data) {
     amqpCon
         .then(conn => conn.createChannel())

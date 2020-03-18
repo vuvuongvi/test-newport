@@ -6,7 +6,7 @@ const taskToDoList = require('./db/models/task');
 const amqp = require('amqplib');
 const uuid = require('uuid/v4');
 require('dotenv').config();
-const amqpCon = amqp.connect(process.env.RABBITMQ_PRODUCTION);
+const amqpCon = amqp.connect(process.env.RABBITMQ_LOCAL);
 const rpcAdd = require('./rpc/queue_add');
 const app = express();
 app.use(bodyParser.json());
